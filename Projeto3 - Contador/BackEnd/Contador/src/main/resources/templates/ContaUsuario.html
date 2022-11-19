@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Next</title>
+    <script src="https://kit.fontawesome.com/70755a9900.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        .navbar{
+            background-color: #00ff5f;
+        }
+        .fa-arrow-left{
+            color: #00ff5f;
+            cursor: pointer;
+        }
+        .iconeBurguer{
+            cursor: pointer;
+        }
+        .titulo{
+            font-family: 'Sora';
+            font-style: normal;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .spanTitulo, .iconeBurguer, .linksNav, .fa-circle-exclamation{
+            color: #000000;
+            height: 60px;
+        }
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 12;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #00ff5f;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+        .sectionOne{
+            background-color: #00ff5f;
+            height: 400px;
+            z-index: -10;
+            margin-bottom: 300px;
+        }
+        .janelaInfoPrincipal{
+            position: absolute;
+            top: 180px;
+            z-index: 10;
+            background-color: #000;
+            height: 850px;
+            color: #ffffff;
+            width: 1750px;
+            border-radius: 20px 20px 20px 20px;
+            margin-left: 80px;
+            margin-right: 80px;
+            box-shadow: 10px 5px 5px rgba(113, 113, 113, 0.2);
+        }
+        .spanName{
+            color: #000000;
+            font-family: 'Sora';
+            font-weight: 600;
+            font-size: 34px;
+            margin-left: 80px;
+            margin-top: 70px;
+        }
+        .textoAbaixoDoNome{
+            color: #717171;
+            font-family: 'Sora';
+            font-weight: 400;
+            margin-left: 80px;
+            font-size: 16px;
+        }
+
+        .area-chart {
+            margin: 0;
+            padding: 0;
+            border: 0;
+
+            /* Dimensions */
+            width: 100%;
+            max-width: var(--chart-width, 1914px);
+            height: var(--chart-height, 300px);
+        }
+        .area-chart tbody {
+            width: 100%;
+            height: var(--chart-height, 300px);
+
+            /* Layout */
+            display: flex;
+            justify-content: stretch;
+            align-items: stretch;
+            flex-direction: row;
+        }
+        .area-chart tr {
+            position: relative;
+
+            /* Even size items */
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 0;
+        }
+        .area-chart td {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+
+            /* Color */
+            background: var(--color, rgba(240, 50, 50, 0.75));
+            clip-path: polygon(
+              0% calc(100% * (1 - var(--start))),
+              100% calc(100% * (1 - var(--end))),
+              100% 100%,
+              0% 100%
+            );
+        }
+        .area-chart td:nth-of-type(1) {
+            --color: rgba(0, 255, 95, 0.75);
+        }
+        .area-chart td:nth-of-type(2) {
+            --color: rgba(18, 163, 72, 0.75);
+        }
+        .area-chart td:nth-of-type(3) {
+            --color: rgba(18, 163, 72, 0.75);
+        }
+
+        .cards-wrapper {
+              display: flex;
+              justify-content: center;
+        }
+        .card {
+              margin: 0 0.5em;
+              height: 360px;
+              width: 280px;
+              background-color: #1e1f1e;
+              opacity: 0.7;
+              box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+              border: 1px solid #00ff5f;
+              transition-duration: 0.4s;
+              border-radius: 15px;
+        }
+
+        .card:hover{
+             box-shadow: 2px 6px 8px 0 rgba(0, 255, 95);
+             border: 3px solid #00ff5f;
+             margin-top:15px;
+             opacity: 1;
+        }
+        .carousel-inner {
+            margin-left: 70px;
+            margin-right: 70px;
+            margin-top: 25px;
+            padding: 1em;
+        }
+        .carousel-control-prev,
+        .carousel-control-next {
+              background-color: #e1e1e1;
+              width: 5vh;
+              height: 5vh;
+              border-radius: 50%;
+              top: 50%;
+              transform: translateY(-50%);
+        }
+        .widthCaroussel{
+            width: 700px;
+        }
+        .carrouselDisplay{
+            display: flex;
+        }
+        .buttonCards{
+            border: 1px solid #00ff5f;
+            height: 40px;
+            width: 120px;
+            border-radius: 25px;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            text-decoration: none;
+            align-items: center;
+            margin-left: 55px;
+            text-align: center;
+            background-color: transparent;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .buttonCards:hover{
+            background-color: #00ff5f;
+        }
+        .cardSpan{
+            color: #ffffff;
+            text-align: center;
+            font-family: 'Sora';
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .cardSpan:hover{
+            color: #000000;
+        }
+        .iconsCard{
+            color: #00ff5f;
+            text-align: center;
+            margin-top: 40px
+        }
+        .widhtNexts{
+            width: 1215px;
+        }
+        .cardTitle{
+            color: #ffffff;
+            text-align: center;
+            font-family: 'Sora';
+            font-weight: 600;
+            font-size: 20px;
+        }
+        .cardText{
+            color: #717171;
+            text-align: center;
+            font-family: 'Sora';
+            font-weight: 300;
+            font-size: 16px;
+        }
+
+<!--        SIDENAV-->
+        .iconeSideBack{
+            color: #717171;
+        }
+        .linksNavUser{
+            height: 50px;
+        }
+        .iconeUser{
+            margin-right: 15px;
+        }
+        .hrSideNav{
+            background: #00ff5f;
+            height: 2px;
+            width: 250px;
+            opacity: 0.4;
+        }
+        .iconePost{
+             background-color: #00ff5f;
+             position: fixed;
+             border-radius: 50%;
+             top: 800px;
+             left: 1650px;
+             right: 270px;
+             color: #000000;
+             width: 70px;
+             height: 70px;
+             cursor: pointer;
+             justify-content: center;
+             align-items: auto;
+             display: flex;
+             z-index: 15;
+             transition-duration: 0.4s;
+        }
+        .iconePost:hover, .spanNext:hover{
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        .iconePost:active {
+             background-color: #3e8e41;
+             box-shadow: 0 5px #666;
+             transform: translateY(4px);
+        }
+        .iconAdd{
+             z-index: 15;
+             color: #000000;
+             margin-top: 10px;
+        }
+        .fotoUserIniciais{
+            height: 200px;
+            width: 200px;
+            border: 3px solid #00ff5f;
+            border-radius: 50%;
+            background-color: #00ff5f;
+            color: #000000;
+            text-align: center;
+            box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            margin: 70px 40px 40px 50px;
+            cursor: pointer;
+        }
+        .fotoUserIniciais:hover{
+            opacity: 0.8;
+            background-color: #000000;
+        }
+        .fa-camera{
+            color: #00ff5f;
+            margin-top: 70px;
+        }
+        .nomeUsuario{
+            font-size: 120px;
+            width: 200px;
+        }
+        .divFotoNome{
+            display: flex;
+        }
+        .divNome{
+            width: 1550px;
+            height: 500px;
+            margin: 70px 40px 40px 0px;
+        }
+        .displayFlex{
+            display: flex;
+        }
+        .iconInfo{
+            color: #00ff5f;
+            opacity: 0.5;
+            margin-top: 7px;
+            margin-right: 13px;
+            font-size: 20px;
+        }
+        .nome{
+            color: #ffffff;
+            font-family: 'Sora';
+            font-weight: 600;
+            font-size: 40px;
+            margin: 0px;
+        }
+        .infoEmail{
+            margin-bottom: 30px;
+            color: #717171;
+            font-family: 'Sora';
+            font-weight: 600;
+            font-size: 22px;
+            margin-right: 13px;
+        }
+
+        .iconInfoSenha{
+            color: #717171;
+            margin-top: 7px;
+            margin-right: 13px;
+            font-size: 20px;
+            transition: 0.4s;
+        }
+        .iconInfoSenha:hover{
+            color: #00ff5f;
+            opacity: 0.5;
+        }
+        .hrVerde{
+            margin: 15px 50px 15px 50px;
+            height: 3px;
+            width: 100%;
+            background-color: #00ff5f;
+            opacity: 0.5;
+        }
+        .divInformacoesContato{
+            margin-top: 20px;
+            width: 900px;
+        }
+        .iconID{
+            margin-left: 350px;
+            margin-top: 21px;
+            margin-right: 1px;
+        }
+        .spanID{
+            margin-top: 16px;
+        }
+        .emailRecupera{
+            margin-left: 120px;
+        }
+        .iconRedes{
+            margin-right: 40px;
+            color: #717171;
+            transition: 0.4s;
+            font-size: 35px;
+            cursor: pointer;
+        }
+        .iconRedes:hover{
+            color: #00ff5f;
+        }
+        .tituloInfo{
+            width: 250px;
+        }
+        .tituloInfoContato{
+            width: 500px;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-light">
+    <i class="fa-solid fa-2x iconeBurguer fa-bars" onclick="openNav()"></i>
+    <h1 class="titulo">Personal <span class="spanTitulo">Bank</span></h1>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa-solid fa-1x fa-arrow-left iconeSideBack"></i></a>
+    <a href="#" class="linksNavUser"><i class="fa-regular fa-user iconeUser"></i><span th:text="${usuario.nome}">Ezequiel</span></a>
+    <hr class="hrSideNav">
+    <a href="/NovoRelatorioDiario" class="linksNav"><i class="fa-solid fa-plus iconeUser"></i>Novo Registro</a>
+    <a href="/home" class="linksNav"><i class="fa-solid fa-calendar-days iconeUser"></i>Mensal</a>
+    <a href="/home" class="linksNav"><i class="fa-regular fa-calendar iconeUser"></i>Anual</a>
+    <a href="/home" class="linksNav"><i class="fa-solid fa-calendar-day iconeUser"></i>Diário</a>
+    <a href="/login" class="linksNav"><i class="fa-solid fa-arrow-right-from-bracket iconeUser"></i>Sair</a>
+</div>
+<section class="sectionOne">
+    <span class="spanName">Esta é sua conta</span>
+    <!--        <p class="textoAbaixoDoNome">Aqui está o relatório de vendas</p>-->
+    <p class="textoAbaixoDoNome">Aqui está os seus dados!</p>
+    <div class="janelaInfoPrincipal">
+        <div class="divFotoNome">
+            <div class="fotoUserIniciais" id="divNome" onmouseover="mostraCamera()" onmouseleave="retiraCamera()">
+                <span class="nomeUsuario" id="spanNome" th:text="${inicial}">EA</span>
+            </div>
+            <div class="divNome">
+                <div class="displayFlex">
+                    <h1 class="nome"><span th:text="${usuario.nome}">Nome </span> <span th:text="${usuario.sobrenome}">Alves de Moura</span></h1>
+                    <div class="displayFlex">
+                        <i class="fa-solid fa-info iconInfo iconID"></i>
+                        <span class="infoEmail spanID">D: </span>
+                        <span class="infoEmail spanID" th:text="${usuario.id_usuario}">213123</span>
+                    </div>
+                </div>
+                <div class="displayFlex">
+                    <i class="fa-solid fa-envelope iconInfo"></i>
+                    <span class="infoEmail">Email:  </span>
+                    <p class="infoEmail" th:text="${usuario.email}">ezequielalves2110@gmail.com</p>
+                </div>
+                <div class="displayFlex div2">
+                    <i class="fa-solid fa-key iconInfo"></i>
+                    <span class="infoEmail">Senha:  </span>
+                    <p class="infoEmail">**********</p>
+                    <a href="/TrocarSenha">
+                        <i class="fa-solid fa-pen iconInfoSenha"></i>
+                    </a>
+                </div>
+                <div class="displayFlex">
+                    <i class="fa-solid fa-id-card iconInfo"></i>
+                    <span class="infoEmail">CPF: </span>
+                    <p class="infoEmail" th:text="${usuario.cpf}">724.939.328<span>-</span>15</p>
+                </div>
+                <div class="displayFlex divEndereco">
+                    <i class="fa-solid fa-house iconInfo"></i>
+                    <span class="infoEmail">Endereço: </span>
+                    <p class="infoEmail" th:text="${usuario.endereco}">Rua Guilhermina Gonçalves</p>
+                </div>
+                <div class="displayFlex divCep">
+                    <i class="fa-solid fa-location-dot iconInfo"></i>
+                    <span class="infoEmail">CEP: </span>
+                    <p class="infoEmail" th:text="${usuario.cep}">048640-10</p>
+                </div>
+                <div class="displayFlex">
+                    <i class="fa-solid fa-phone iconInfo"></i>
+                    <span class="infoEmail">Celular: </span>
+                    <p class="infoEmail" th:text="${usuario.celular}">+55 11 03802183<span>-</span>15</p>
+                </div>
+                <div class="displayFlex">
+                    <i class="fa-solid fa-envelope iconInfo"></i>
+                    <span class="infoEmail">Email de recuperação:  </span>
+                    <p class="infoEmail" th:text="${usuario.email_de_recuperacao}">ezequielalves1021@gmail.com</p>
+                </div>
+                <div class="displayFlex divInformacoesContato">
+                    <span class="infoEmail tituloInfo">Redes sociais</span>
+                    <hr class="hrVerde">
+                </div>
+                <div class="displayFlex">
+                    <a href="https://www.instagram.com/ezequiel___alves/"><i class="fa-brands fa-instagram iconRedes"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100008485382775"><i class="fa-brands fa-facebook iconRedes"></i></a>
+                    <a href="https://www.linkedin.com/in/ezequielamoura/"><i class="fa-brands fa-linkedin iconRedes"></i></a>
+                    <a href="https://github.com/Ezequie1"><i class="fa-brands fa-github iconRedes"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<div class="iconePost">
+    <a href="/NovoRelatorioDiario"><i class="iconAdd fa-solid fa-3x fa-plus"></i></a>
+</div>
+<table class="area-chart">
+    <tbody>
+    <tr>
+        <td style="--start:0.1; --end:0.5;"> 50 </td>
+        <td style="--start:0.0; --end:0.2;"> 20 </td>
+        <td style="--start:0.2; --end:0.4;"> 40 </td>
+    </tr>
+    <tr>
+        <td style="--start:0.5; --end:0.8;"> 80 </td>
+        <td style="--start:0.2; --end:0.5;"> 50 </td>
+        <td style="--start:0.4; --end:0.1;"> 10 </td>
+    </tr>
+    <tr>
+        <td style="--start:0.8; --end:0.4;"> 40 </td>
+        <td style="--start:0.5; --end:0.3;"> 30 </td>
+        <td style="--start:0.1; --end:0.2;"> 20 </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        var divComNome = document.getElementById('divNome');
+        var spanComNome = document.getElementById('spanNome');
+        const valor = document.getElementById('spanNome').textContent;
+
+        function mostraCamera() {
+            divComNome.innerHTML = '<i class="fa-solid fa-4x fa-camera"></i>';
+            divComNome.classList.remove("nomeUsuario");
+        }
+
+        function retiraCamera(){
+            divComNome.innerHTML = valor;
+            divComNome.classList.add("nomeUsuario");
+        }
+    </script>
+</body>
+</html>

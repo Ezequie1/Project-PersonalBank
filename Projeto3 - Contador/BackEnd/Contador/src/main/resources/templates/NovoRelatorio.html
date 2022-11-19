@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org " xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Next</title>
+    <script src="https://kit.fontawesome.com/70755a9900.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        .navbar{
+            background-color: #00ff5f;
+        }
+        .fa-arrow-left{
+            color: #00ff5f;
+            cursor: pointer;
+        }
+        .iconeBurguer{
+            cursor: pointer;
+        }
+        .titulo{
+            font-family: 'Sora';
+            font-style: normal;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .spanTitulo, .iconeBurguer, .linksNav, .fa-circle-exclamation{
+            color: #000000;
+        }
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 12;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #00ff5f;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+        .sectionOne{
+            background-color: #00ff5f;
+            height: 400px;
+            margin-bottom: 197px;
+            z-index: -10;
+        }
+        .janelaInfoPrincipal{
+            position: absolute;
+            top: 180px;
+            left: 630px;
+            z-index: 10;
+            background-color: #000000;
+            height: 590px;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            width: 750px;
+            text-align: center;
+            border-radius: 20px 20px 20px 20px;
+
+        }
+        .spanName{
+            color: #000000;
+            font-family: 'Sora';
+            font-weight: 600;
+            font-size: 34px;
+            margin-left: 80px;
+            margin-top: 70px;
+        }
+        .textoAbaixoDoNome{
+            color: #717171;
+            font-family: 'Sora';
+            font-weight: 400;
+            margin-left: 80px;
+            font-size: 16px;
+        }
+        .area-chart {
+            margin: 0;
+            padding: 0;
+            border: 0;
+
+            /* Dimensions */
+            width: 100%;
+            max-width: var(--chart-width, 1914px);
+            height: var(--chart-height, 300px);
+        }
+        .area-chart tbody {
+            width: 100%;
+            height: var(--chart-height, 300px);
+
+            /* Layout */
+            display: flex;
+            justify-content: stretch;
+            align-items: stretch;
+            flex-direction: row;
+        }
+        .area-chart tr {
+            position: relative;
+
+            /* Even size items */
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 0;
+        }
+        .area-chart td {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+
+            /* Color */
+            background: var(--color, rgba(240, 50, 50, 0.75));
+            clip-path: polygon(
+              0% calc(100% * (1 - var(--start))),
+              100% calc(100% * (1 - var(--end))),
+              100% 100%,
+              0% 100%
+            );
+        }
+        .area-chart td:nth-of-type(1) {
+            --color: rgba(0, 255, 95, 0.75);
+        }
+        .area-chart td:nth-of-type(2) {
+            --color: rgba(18, 163, 72, 0.75);
+        }
+        .area-chart td:nth-of-type(3) {
+            --color: rgba(18, 163, 72, 0.75);
+        }
+        .tituloFormulário{
+            margin-top: 20px;
+            font-family: 'Sora';
+            font-size: 34px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .divData{
+            margin-top: 40px;
+        }
+        .fa-calendar-days{
+            color: #717171;
+            margin-right: 20px;
+            opacity: 0.7;
+        }
+
+        .fa-credit-card{
+            color: #717171;
+            margin-right: 20px;
+            opacity: 0.7;
+        }
+        .barraData{
+            color: #00ff5f;
+            margin-right: 10px;
+            margin-left: 10px;
+            font-size: 40px;
+        }
+        .inputData{
+            box-shadow: 0 0 0 0;
+            border: 0 none;
+            outline: 0;
+            font-size: 18px;
+            heigth: 40px;
+            width: 30px;
+            font-weight: 600;
+            background-color: transparent;
+            color: #717171;
+        }
+        .inputDataAno{
+            box-shadow: 0 0 0 0;
+            border: 0 none;
+            outline: 0;
+            font-weight: 600;
+            font-size: 18px;
+            heigth: 40px;
+            width: 52px;
+            background-color: transparent;
+            color: #717171;
+        }
+        .divBottom{
+            margin-left: 50px;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        }
+        input[type=number] {
+            -moz-appearance:textfield;
+        }
+        .lineGreen{
+            background-color: #00ff5f;
+            height: 8px;
+            opacity: 1;
+            width: 70px;
+            margin-left: 230px;
+        }
+        .divDataFlex{
+            display: flex;
+            width: 300px;
+            transition: 0.4s;
+        }
+        .tituloData{
+            text-align: left;
+            font-size: 25px;
+            margin-top: 25px;
+            color: #717171;
+        }
+        .divDataFlex:hover, .cardCredit:hover, .cardDebit:hover{
+            border-bottom: 2px solid #00ff5f;
+        }
+        .divDataFlex:focus{
+            border-bottom: 5px solid #00ff5f;
+        }
+        .cardCredit{
+            margin-top: 10px;
+            display: flex;
+            transition: 0.4s;
+            width: 250px;
+        }
+        .cardDebit{
+            margin-top: 10px;
+            display: flex;
+            transition: 0.4s;
+            width: 250px;
+        }
+        .divDataFlexCard{
+        }
+        .spanRS{
+            font-size: 30px;
+            color: #717171;
+            font-size: 30px;
+            margin-right: 10px;
+            font-family: 'Sora';
+            font-weight: 600;
+        }
+        .inputCards{
+            width: 92px;
+        }
+        .alignCenter{
+            display: flex;
+        }
+        .spanCards{
+            display: flex;
+            width: 100px;
+            justify-content: center;
+            font-size: 25px;
+            color: #717171;
+            margin-right: 10px;
+            font-family: 'Sora';
+            font-weight: 600;
+        }
+        .fa-sack-dollar{
+            color: #717171;
+        }
+        .divDinheiro{
+            width: 250px;
+        }
+        .buttons{
+            display: flex;
+            margin-top: 30px;
+            justify-content: flex-end;
+        }
+        .buttonSubmit{
+            border: 2px solid #00ff5f;
+            color: #00ff5f;
+            height: 50px;
+            width: 120px;
+            transition: 0.4s;
+            background-color: transparent;
+            border-radius: 25px;
+            font-size: 15px;
+            font-family: 'Sora';
+            font-weight: 600;
+        }
+        .buttonSubmit:hover{
+            background-color: #00ff5f;
+            color: #000000;
+        }
+        .buttonCancelar{
+            margin-right: 20px;
+            border: 2px solid #717171;
+            color: #717171;
+            height: 50px;
+            width: 120px;
+            transition: 0.4s;
+            background-color: transparent;
+            border-radius: 25px;
+            font-size: 15px;
+            font-family: 'Sora';
+            font-weight: 600;
+        }
+        .buttonCancelar:hover{
+            border: 2px solid #00ff5f;
+            color: #00ff5f;
+        }
+        .buttonCancelar:focus{
+            border: 2px solid #00ff5f;
+            color: #000000;
+            background-color: #00ff5f;
+        }
+        .progressBar{
+            height: 7px;
+            background-color: #00ff5f;
+            width: 0%;
+            margin: 15px 40px 20px 40px;
+            border-radius: 3px;
+        }
+        .divComInfoDoRelatorio{
+            margin-top: 40px;
+            height: 300px;
+            width: 600px;
+            border-radius: 25px;
+            border: 5px solid #00ff5f;
+            background-color: transparent;
+        }
+        .justify{
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .dataRelatorio{
+            margin-top: 30px;
+            display: flex;
+        }
+        .icones{
+            color: #717171;
+            margin-left: 30px;
+            min-width: 40px;
+            margin-right: 20px;
+            transition: 1s;
+        }
+        .icones:hover{
+            color: #00ff5f;
+        }
+        .infosRelatorio{
+            color: #717171;
+            font-family: 'Sora';
+            font-weight: 600;
+            width: 100%;
+            text-align: left;
+            font-size: 18px;
+            margin-top: 7px;
+            margin-left: 15px;
+        }
+        .valores{
+            text-align: right;
+            width: 100%;
+            margin-top: 7px;
+            color: #717171;
+            font-family: 'Sora';
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .barrasData{
+            text-align: right;
+            width: 210px;
+            margin-top: 7px;
+            opacity: 0.6;
+            color: #00ff5f;
+            font-family: 'Sora';
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .rs{
+            opacity: 0.6;
+            color: #00ff5f;
+        }
+        .divisaoRelatorio{
+            height: 2px;
+            background-color: #717171;
+            margin-left: 30px;
+            margin-bottom: 20px;
+            margin-right: 30px;
+        }
+        .spanVirgula{
+            color: #00ff5f;
+            font-family: 'Sora';
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .spanAbaixoNovoRelatorio{
+            color: #717171;
+            font-family: 'Sora';
+            font-weight: 400;
+            font-size: 16px;
+        }
+        .iconError{
+            margin-right: 30px;
+            margin-top: 7px;
+        }
+        .iconeUser{
+            margin-right: 15px;
+        }
+        .hrSideNav{
+            background: #00ff5f;
+            height: 2px;
+            width: 250px;
+            opacity: 0.4;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-light">
+    <i class="fa-solid fa-2x iconeBurguer fa-bars" onclick="openNav()"></i>
+    <h1 class="titulo">Personal <span class="spanTitulo">Bank</span></h1>
+</nav>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa-solid fa-1x fa-arrow-left iconeSideBack"></i></a>
+    <a href="/ContaUsuario" class="linksNavUser"><i class="fa-regular fa-user iconeUser"></i><span th:text="${usuarioLogado.nome}">Nome</span></a>
+    <hr class="hrSideNav">
+    <a href="/NovoRelatorioDiario" class="linksNav"><i class="fa-solid fa-plus iconeUser"></i>Novo Registro</a>
+    <a href="#" class="linksNav"><i class="fa-brands fa-font-awesome iconeUser"></i>Bandeiras</a>
+    <a href="/home" class="linksNav"><i class="fa-solid fa-calendar-days iconeUser"></i>Mensal</a>
+    <a href="/home" class="linksNav"><i class="fa-regular fa-calendar iconeUser"></i>Anual</a>
+    <a href="/home" class="linksNav"><i class="fa-solid fa-calendar-day iconeUser"></i>Diário</a>
+    <a href="/login" class="linksNav"><i class="fa-solid fa-arrow-right-from-bracket iconeUser"></i>Sair</a>
+</div>
+<section class="sectionOne">
+    <span class="spanName">Novo relatório diário</span>
+    <!--        <p class="textoAbaixoDoNome">Aqui está o relatório de vendas</p>-->
+    <p class="textoAbaixoDoNome">Preencha as informações necessárias para o relatório</p>
+    <div class="janelaInfoPrincipal">
+        <div class="divData">
+            <h1 class="tituloFormulário">Novo Relatório</h1>
+            <span class="spanAbaixoNovoRelatorio">Arredonde os valores de modo que não tenha centavos</span>
+            <form th:object="${newRelatorio}" th:action="@{/add}" method="post">
+                <div class="divComInfoDoRelatorio">
+                    <div class="dataRelatorio">
+                        <i class="fa-regular fa-2x fa-calendar-days icones"></i>
+                        <span class="infosRelatorio infoDatas">Data do relatório</span>
+                        <div class="valores">
+                            <input type="text" class="inputData" id="dia" min="1" max="31"  maxlength="2" th:field="*{dia}">
+                            <span class="barrasData">/</span>
+                            <input type="text" class="inputData" id="mes" maxlength="2" th:field="*{mes}">
+                            <span class="barrasData">/</span>
+                            <input type="text" class="inputDataAno" id="ano" onmouseleave="validaData()" maxlength="4" th:field="*{ano}">
+                        </div>
+                        <span>
+                            <lord-icon
+                                    src="https://cdn.lordicon.com/egiwmiit.json"
+                                    trigger="loop"
+                                    delay="2000"
+                                    colors="primary:#000000"
+                                    style="width:26px;height:26px"
+                                    class="iconError"
+                                    id="iconeData">
+                            </lord-icon>
+                        </span>
+                    </div>
+                    <div class="dataRelatorio">
+                        <i class="fa-regular fa-2x fa-credit-card icones"></i>
+                        <span class="infosRelatorio">Cartão de crédito</span>
+                        <div class="valores" >
+                            <span class="rs">R$:</span>
+                            <input type="text" class="inputData inputCards" id="credito" onmouseleave="validaCredito()" placeholder="0.00" maxlength="8" th:field="*{totalDeVendasCredito}">
+                            <span class="errorInput"></span>
+                        </div>
+                        <span>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/egiwmiit.json"
+                                trigger="loop"
+                                delay="2000"
+                                colors="primary:#000000"
+                                style="width:26px;height:26px"
+                                class="iconError"
+                                id="iconeCredito">
+                            </lord-icon>
+                        </span>
+                    </div>
+                    <div class="dataRelatorio">
+                        <i class="fa-solid fa-2x fa-credit-card icones"></i>
+                        <span class="infosRelatorio">Cartão de débito</span>
+                        <div class="valores">
+                            <span class="rs">R$:</span>
+                            <input type="text" class="inputDataAno inputCards" onmouseleave="validaDebito()" placeholder="0.00" id="debito" maxlength="8" th:field="*{totalDeVendasDebito}">
+                            <span class="errorInput"></span>
+                        </div>
+                        <span>
+                            <lord-icon
+                                    src="https://cdn.lordicon.com/egiwmiit.json"
+                                    trigger="loop"
+                                    delay="2000"
+                                    colors="primary:#000000"
+                                    style="width:26px;height:26px"
+                                    class="iconError"
+                                    id="iconeDebito">
+                            </lord-icon>
+                        </span>
+                    </div>
+                    <div class="dataRelatorio">
+                        <i class="fa-solid fa-2x fa-sack-dollar icones"></i>
+                        <span class="infosRelatorio">Dinheiro</span>
+                        <div class="valores">
+                            <span class="rs">R$:</span>
+                            <input type="text" class="inputData inputCards" id="dinheiro" onmouseleave="validaDinheiro()" placeholder="0.00" maxlength="8" th:field="*{totalDeVendasDinheiro}">
+                            <span class="errorInput"></span>
+                        </div>
+                        <span>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/egiwmiit.json"
+                                trigger="loop"
+                                delay="2000"
+                                colors="primary:#000000"
+                                style="width:26px;height:26px"
+                                class="iconError"
+                                id="iconeDinheiro">
+                            </lord-icon>
+                        </span>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <a href="/home">
+                        <button type="button" class="buttonCancelar">Cancelar</button>
+                    </a>
+                    <button id="buttonEvent" type="button" class="buttonSubmit">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<table class="area-chart">
+    <tbody>
+    <tr>
+        <td style="--start:0.1; --end:0.5;"> 50 </td>
+        <td style="--start:0.0; --end:0.2;"> 20 </td>
+        <td style="--start:0.2; --end:0.4;"> 40 </td>
+    </tr>
+    <tr>
+        <td style="--start:0.5; --end:0.8;"> 80 </td>
+        <td style="--start:0.2; --end:0.5;"> 50 </td>
+        <td style="--start:0.4; --end:0.1;"> 10 </td>
+    </tr>
+    <tr>
+        <td style="--start:0.8; --end:0.4;"> 40 </td>
+        <td style="--start:0.5; --end:0.3;"> 30 </td>
+        <td style="--start:0.1; --end:0.2;"> 20 </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="https://cdn.lordicon.com/qjzruarw.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        const inputDataDia = document.getElementById('dia');
+        const inputDataMes = document.getElementById('mes');
+        const inputDataAno = document.getElementById('ano');
+        const inputCredito = document.getElementById('credito');
+        const inputDebito = document.getElementById('debito');
+        const inputDinheiro = document.getElementById('dinheiro');
+
+        var iconData = document.getElementById('iconeData');
+        var iconCredito = document.getElementById('iconeCredito');
+        var iconDebito = document.getElementById('iconeDebito');
+        var iconDinheiro = document.getElementById('iconeDinheiro');
+
+        var button = document.getElementById('buttonEvent');
+
+        function validaData(){
+
+            if(inputDataDia.value == 0 || inputDataMes.value == 0 || inputDataAno.value == 0  ){
+                iconData.src="https://cdn.lordicon.com/vacmyjrh.json";
+                iconData.colors="primary:#e83a30";
+            }else{
+                iconData.src="https://cdn.lordicon.com/egiwmiit.json"
+                iconData.colors="primary:#00ff5f";
+            }
+        }
+
+        function validaCredito(){
+
+            if(inputCredito.value.length == 0){
+                iconCredito.src="https://cdn.lordicon.com/vacmyjrh.json";
+                iconCredito.colors="primary:#e83a30";
+            }else{
+                iconCredito.src="https://cdn.lordicon.com/egiwmiit.json"
+                iconCredito.colors="primary:#00ff5f";
+            }
+        }
+
+        function validaDebito(){
+
+            if(inputDebito.value.length == 0){
+                iconDebito.src="https://cdn.lordicon.com/vacmyjrh.json";
+                iconDebito.colors="primary:#e83a30";
+            }else{
+                iconDebito.src="https://cdn.lordicon.com/egiwmiit.json"
+                iconDebito.colors="primary:#00ff5f";
+            }
+        }
+
+        function validaDinheiro(){
+
+            if(inputDinheiro.value.length == 0){
+                iconDinheiro.src="https://cdn.lordicon.com/vacmyjrh.json";
+                iconDinheiro.colors="primary:#e83a30";
+            }else{
+                iconDinheiro.src="https://cdn.lordicon.com/egiwmiit.json"
+                iconDinheiro.colors="primary:#00ff5f";
+            }
+
+            if(inputDataDia.value.length != 0 && inputDataMes.value.length != 0 && inputDataAno.value.length != 0 && inputCredito.value.length != 0 && inputDebito.value.length != 0 && inputDinheiro.value.length != 0){
+                button.type="submit";
+                button.value='Enviar';
+            }
+
+        }
+
+
+<!--        }-->
+    </script>
+</body>
+</html>

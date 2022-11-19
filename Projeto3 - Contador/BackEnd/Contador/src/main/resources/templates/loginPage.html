@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Personal Bank</title>
+    <script src="https://kit.fontawesome.com/70755a9900.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        .divDisplayFlex{
+            height: 100vh;
+            display: flex;
+        }
+        .div1{
+            margin-top: 100px;
+            margin-left: 100px;
+            width: 1200px;
+            z-index: -10;
+        }
+        .titulo{
+            font-family: 'Sora';
+            font-style: normal;
+            font-weight: 800;
+        }
+        .spanTitulo{
+            color: #00ff5f;
+        }
+        .divCenter{
+            align-itens: center;
+            text-align: center;
+        }
+        .imagemPrincipal{
+            margin-top: 50px;
+            height: 500px;
+            width: 500px;
+        }
+        .marginH3{
+            margin-top: 40px;
+            font-family: 'Sora';
+            font-weight: 600;
+        }
+        .fontP{
+           font-family: 'Sora';
+           font-weight: 300;
+        }
+        .div2{
+            border-radius: 30px 0px 0px 30px;
+            background-color: black;
+            z-index: 1000;
+            width: 700px;
+            text-align: center;
+        }
+        .userImage{
+            margin-top: 150px;
+            height: 200px;
+            width: 200px;
+        }
+        .fontH3{
+            margin-top: 50px;
+            margin-bottom: 40px;
+            font-family: 'Sora';
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .inputs{
+            border-radius: 0px 15px 15px 0px ;
+            height: 50px;
+            font-size: 18px;
+            color: #717171;
+            width: 400px;
+            font-weight: 600;
+            background-color: transparent;
+            border: 4px solid #00ff5f;
+        }
+        .button{
+            border-radius: 15px 0px 0px 15px;
+        }
+        .divInputs{
+            display: flex;
+            justify-content: initial;
+            border: 3px solid #00ff5f;
+            width: 430px;
+            margin-left: 120px;
+            border-radius: 30px 30px 30px 30px;
+            margin-bottom: 20px;
+        }
+        .divIcons{
+            align-items: center;
+            justify-content: center;
+            height: 35px;
+            background-color: transparent;
+            border-radius: 30px 0px 0px 30px;
+        }
+        .icons{
+            color: #717171;
+            margin-top: 13px;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 22px;
+        }
+        textarea:focus, input:focus, select:focus, .inputs {
+            box-shadow: 0 0 0 0;
+            border: 0 none;
+            outline: 0;
+        }
+        .buttonSubmit{
+            border: 3px solid #00ff5f;
+            outline: 0;
+            box-shadow: 0 0 0 0;
+            background-color: transparent;
+            font-family: 'Sora';
+            font-weight: 600;
+            color: #717171;
+            transition-duration: 0.4s;
+            height: 50px;
+            width: 200px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-radius: 30px 30px 30px 30px;
+        }
+        .buttonSubmit:hover{
+            background-color: #00ff5f;
+            color: #000000;
+        }
+        .hrDivisao1{
+            height: 3px;
+            background: #ffffff;
+            width: 140px;
+            margin-right: 10px;
+            margin-bottom: 8px;
+        }
+        .hrDivisao2{
+            height: 3px;
+            background: #ffffff;
+            width: 140px;
+            margin-left: 10px;
+            margin-bottom: 8px;
+        }
+        .divOu{
+            display: flex;
+            position: relative;
+            justify-content: center;
+        }
+        .spanOu{
+            color: #ffffff;
+            font-family: 'Sora';
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        .buttonNew{
+            border: 3px solid #00ff5f;
+            outline: 0;
+            box-shadow: 0 0 0 0;
+            background-color: transparent;
+            font-family: 'Sora';
+            font-weight: 600;
+            color: #717171;
+            transition-duration: 0.4s;
+            height: 50px;
+            width: 200px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-radius: 30px 30px 30px 30px;
+        }
+        .buttonNew:hover{
+            background-color: #00ff5f;
+            color: #000000;
+        }
+        .circleUser{
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: 4px solid #00ff5f;
+        }
+        .columnUser{
+            margin-top: 80px;
+            display: flex;
+            justify-content: center;
+        }
+        .inputSenha{
+            border-radius: 0px 0px 0px 0px ;
+            width: 340px;
+        }
+        .fa-eye{
+            color: #717171;
+            font-size: 25px;
+            margin-top: 11px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+        .fa-eye:hover{
+            color: #00ff5f;
+        }
+        .fa-eye:active{
+            color: #00ff5f;
+            font-size: 22px;
+        }
+        .senhaInvalida{
+            margin-left: 120px;
+            width: 200px;
+            color: red;
+            font-size: 14px;
+            font-family: 'Sora';
+        }
+        .usuarioLogado{
+            margin-left: 120px;
+            width: 315px;
+            color: #00ff5f;
+            font-size: 14px;
+            font-family: 'Sora';
+        }
+    </style>
+</head>
+<body>
+    <div class="divDisplayFlex">
+        <div class="div1">
+            <div>
+                <h1 class="titulo">Personal <span class="spanTitulo">Bank</span></h1>
+            </div>
+            <div class="divCenter">
+                <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
+                <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
+                <lord-icon
+                        src="https://cdn.lordicon.com/bewubbww.json"
+                        trigger="loop"
+                        delay="3000"
+                        colors="primary:#00ff5f"
+                        state="intro"
+                        style="width:450px;height:450px">
+                </lord-icon>
+                <h3 class="marginH3">Supervisione suas finanças</h3>
+                <p class="fontP">O controle do seu negócio á alguns cliques!</p>
+            </div>
+        </div>
+        <div class="div2">
+            <div>
+                <div class="columnUser">
+                    <div class="circleUser">
+                        <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
+                        <lord-icon
+                                src="https://cdn.lordicon.com/dxjqoygy.json"
+                                trigger="loop"
+                                delay="3000"
+                                colors="primary:#717171,secondary:#00ff5f"
+                                state="hover-looking-around"
+                                style="width:180px;height:180px">
+                        </lord-icon>
+                    </div>
+                </div>
+                <h3 class="fontH3">Faça login em sua conta</h3>
+                <form  action="#" th:action="@{/login}" method="post">
+                    <div>
+                        <div th:if="${param.logout}" class="usuarioLogado">
+                            Voce já está logado, retorne para home!
+                        </div>
+                        <div th:if="${param.error}" class="senhaInvalida">
+                            Email e senha inválidos!
+                        </div>
+                        <div class="divInputs">
+                            <div class="divIcons">
+                                <i class="fa-regular fa-2x fa-user icons"></i>
+                            </div>
+                            <!--                        <input class="inputs" th:field="*{email}" id="username" name="username" type="email" placeholder="Email">-->
+                            <input class="inputs" id="username" name="username" type="email" placeholder="Email">
+                        </div>
+
+                    </div>
+                    <div class="divInputs">
+                        <div class="divIcons">
+                            <i class="fa-solid fa-2x fa-unlock-keyhole icons"></i>
+                        </div>
+                        <!--                        <input class="inputs inputSenha" id="password" name="password" th:field="*{senha}" type="password" placeholder="Senha">-->
+                        <input class="inputs inputSenha" id="password" name="password" type="password" placeholder="Senha">
+                        <div>
+                            <i class="fa-solid fa-2x fa-eye" onclick="verSenha()"></i>
+                        </div>
+                    </div>
+                    <button class="buttonSubmit" type="submit">Entrar</button>
+                </form>
+                <div class="divOu">
+                    <hr class="hrDivisao1">
+                    <span class="spanOu">Ou</span>
+                    <hr class="hrDivisao2">
+                </div>
+                <a href="/Cadastro">
+                    <button class="buttonNew">Cadastre-se</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const input= document.getElementById('password');
+
+        function verSenha(){
+            if (input.type == "password") {
+                input.type = "text";
+              } else {
+                input.type = "password";
+              }
+        }
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
